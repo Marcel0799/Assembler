@@ -1,0 +1,19 @@
+.data
+ein: .word 13 # Eingabewert vom User (z.B. 5)
+erg: .word 1 # Ergebnis bei Programmende (z.B. 5! = 120 = 0x78)
+# Initalisiert mit 1, da 0! = 1
+
+.text
+.globl main
+main:
+lw $2, ein # Eingabe ’holen’
+li $3, 1 # vorbelegen, in $3 könnte ja sonstwas stehen
+blez $2, fertig # 0! gibt keine Schleife
+jump :
+mul $3, $3, $2 # mul erg mit zähler
+subi $2, $2, 1 # runterzählen
+bgt $2, 1, jump # Schleifenende, mul mit 1 muss nicht sein
+fertig:
+sw $3 , erg # Fakultät nach Berechnung in erg
+li $2, 10 # Programmende
+syscall

@@ -1,0 +1,15 @@
+.data
+diff: .word 0x0000fffa
+.text
+main:
+ori $2, $0, 3 	# Reg[2] := 3
+lw $4, diff 	#reg 4 = 65530
+lui $3, 1 	#reg 3 = 65536
+sub $5, $3, $4 	#reg 5 = reg 3 - reg 4
+marke:
+add $5, $5, $5 	#reg 5 = reg5 + reg5 
+sub $2, $2, 1 	#reg 2 = reg 2 - 1
+bne $2, $0, marke # 1. Durchlauf: Nein
+		# 2. Durchlauf:	Nein
+		# 3. Durchlauf: Ja 
+ori $5, $5, 1 	#???????????ß

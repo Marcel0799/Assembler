@@ -1,0 +1,18 @@
+.data
+	wert:	.word 1495
+	quer: 	.word 0
+.text
+.globl main
+main:
+	lw $2,wert		# lade den Eingabewert in Register $2.
+	li $4,0			# Reg [4] für die QS initalisieren.
+loop:	beq $2, $0, ende	# wenn Reg[2] = 0 -> ende.
+	li $3,10		# in Reg[3] steht eine 10 (dezimal).
+	div $2,$2,$3		# wert / 10 und den Teil hinter dem
+	mfhi $3			# Komma in Reg [3] laden
+	add $4, $4, $3		# und in Reg [4] aufaddieren.
+	mflo $2			# Restzahl vor dem Komma in Reg [2] laden.
+	j loop			# bei loop weiterrechnen.
+ende:	sw $4, quer		# Ergebnis in quer ablegen.
+	li $2 , 10
+	syscall			# Programmende

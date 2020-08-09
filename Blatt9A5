@@ -1,0 +1,10 @@
+.data
+	x: .word 0xAB6E
+	y: .word 0x6F57
+.text 
+.globl main
+main : 
+	lw $t1, x
+	lw $t2, y
+	and $t3,$t1,0x6F57
+	ori $t3,$t3,0x84BE
